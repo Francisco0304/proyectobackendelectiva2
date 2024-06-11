@@ -10,7 +10,12 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware para permitir solicitudes de diferentes dominios
-app.use(cors());
+const corsOptions = {
+  origin: 'https://frontluis.vercel.app',
+  optionsSuccessStatus: 200 // Para algunos navegadores antiguos
+};
+
+app.use(cors(corsOptions));
 
 // Middleware para parsear el cuerpo de las solicitudes en formato JSON
 app.use(express.json());
