@@ -1,19 +1,43 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "./index.js",
-      "use": "@vercel/node"
+  "functions": {
+    "api/**/*.js": {
+      "runtime": "vercel-node@0.12",
+      "memory": 512
     }
-  ],
+  },
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "./index.js",
-      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-      "headers": {
-        "Access-Control-Allow-Origin": "*"
-      }
+      "src": "/api-docs",
+      "dest": "/api-docs"
+    },
+    {
+      "src": "/books",
+      "dest": "/api/teamRoutes.js"
+    },
+    {
+      "src": "/.*",
+      "dest": "/"
+    }
+  ],
+  "rewrites": [],
+  "headers": [
+    {
+      "source": "/api-docs/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ]
+    },
+    {
+      "source": "/books/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "https://frontluis.vercel.app"
+        }
+      ]
     }
   ]
 }

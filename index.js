@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware para permitir solicitudes de diferentes dominios
 const corsOptions = {
-  origin: 'https://frontluis.vercel.app', // Asegúrate de que este sea el origen correcto
+  origin: 'https://frontluis.vercel.app',
   optionsSuccessStatus: 200 // Para algunos navegadores antiguos
 };
 
