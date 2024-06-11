@@ -35,6 +35,9 @@ app.get('/', (req, res) => {
   res.send('API is working');
 });
 
+// Manejo de preflight requests
+app.options('*', cors(corsOptions));
+
 // Iniciar el servidor
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
