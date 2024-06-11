@@ -1,0 +1,157 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "API de Libros",
+    "description": "Documentación de la API de Libros"
+  },
+  "host": "localhost:3000",
+  "basePath": "/api",
+  "schemes": ["http"],
+  "paths": {
+    "/libros": {
+      "get": {
+        "summary": "Obtener todos los libros",
+        "responses": {
+          "200": {
+            "description": "Respuesta exitosa",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Libro"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Agregar un nuevo libro",
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "body",
+            "description": "ID del libro a agregar",
+            "schema": {
+              "$ref": "#/definitions/Libro"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Libro agregado exitosamente"
+          }
+        }
+      },
+      "put": {
+        "summary": "Editar un libro",
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "libro",
+            "in": "body",
+            "description": "Datos del libro a actualizar",
+            "schema": {
+              "$ref": "#/definitions/Libro"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Libro actualizado exitosamente"
+          },
+          "404": {
+            "description": "Libro no encontrado"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Eliminar un libro",
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Libro eliminado exitosamente"
+          },
+          "404": {
+            "description": "Libro no encontrado"
+          }
+        }
+      }
+    },
+    "/libros/prestamo/": {
+      "patch": {
+        "summary": "Prestar un libro",
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Libro prestado exitosamente"
+          },
+          "404": {
+            "description": "Libro no encontrado"
+          }
+        }
+      }
+    },
+    "/libros/devolucion/": {
+      "patch": {
+        "summary": "Devolver un libro",
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Libro devuelto exitosamente"
+          },
+          "404": {
+            "description": "Libro no encontrado"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Libro": {
+      "type": "object",
+      "properties": {
+        "year": {
+          "type": "integer"
+        },
+        "nombre": {
+          "type": "string"
+        },
+        "autor": {
+          "type": "string"
+        },
+        "paginas": {
+          "type": "integer"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
