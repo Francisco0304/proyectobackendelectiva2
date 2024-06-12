@@ -6,10 +6,9 @@
     "description": "Documentación de la API de Libros"
   },
   "host": "localhost:3000",
-  "basePath": "/api",
   "schemes": ["http"],
   "paths": {
-    "/libros": {
+    "/books": {
       "get": {
         "summary": "Obtener todos los libros",
         "responses": {
@@ -130,6 +129,86 @@
           }
         }
       }
+    },
+    "/user": {
+      "get": {
+        "summary": "Obtener todos los usuarios",
+        "responses": {
+          "200": {
+            "description": "Respuesta exitosa",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Usuario"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Agregar un nuevo usuario",
+        "parameters": [
+          {
+            "name": "usuario",
+            "in": "body",
+            "description": "Datos del usuario a agregar",
+            "schema": {
+              "$ref": "#/definitions/Usuario"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Usuario agregado exitosamente"
+          }
+        }
+      },
+      "put": {
+        "summary": "Actualizar un usuario existente",
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "usuario",
+            "in": "body",
+            "description": "Datos del usuario a actualizar",
+            "schema": {
+              "$ref": "#/definitions/Usuario"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario actualizado exitosamente"
+          },
+          "404": {
+            "description": "Usuario no encontrado"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Eliminar un usuario",
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario eliminado exitosamente"
+          },
+          "404": {
+            "description": "Usuario no encontrado"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -150,6 +229,18 @@
         },
         "status": {
           "type": "string"
+        }
+      }
+    },
+    "Usuario": {
+      "type": "object",
+      "properties": {
+        "nombre": {
+          "type": "string"
+        },
+        "correoElectronico": {
+          "type": "string",
+          "format": "email"
         }
       }
     }
